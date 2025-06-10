@@ -24,7 +24,7 @@ const Navbar = () => {
                 <h1 className='navbar_heading'>ECommerce Sample</h1>
                 <form className='align_center navbar_form'>
                     <input type="text" className='navbar_search' />
-                    <button type='button' className='navbar_search_button'>Search</button>
+                    <button type='button' className='search_button'>Search</button>
                 </form>
             </div>
             <div className="align_center navbar_links">
