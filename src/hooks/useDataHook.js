@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import clientApi from '../utils/client-api';
 
-const useDataHook = (apiLink, params, deps) => {
+const useDataHook = (apiLink, customConfig, deps) => {
     const [data, setData] = useState(null);
     const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState(false);
@@ -9,9 +9,21 @@ const useDataHook = (apiLink, params, deps) => {
     useEffect(() => {
         setIsLoading(true);
         clientApi
-            .get(apiLink, params)
+            .get(apiLink, customConfig)
             .then(res => {
-                setData(res.data)
+                if (
+                    apiLink === "/products" &&
+                    data &&
+                    data.products &&
+                    customConfig.params.page !== 1
+                ) {
+                    setData((prev) => ({
+                        ...prev,
+                        products: [...prev.products, ...res.data.products]
+                    }));
+                } else {
+                    setData(res.data);
+                }
                 setIsLoading(false);
             })
             .catch(err => {
