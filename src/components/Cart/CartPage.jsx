@@ -23,7 +23,7 @@ const CartPage = () => {
                             <QuantityInput />
                         </td>
                         <td>$999</td>
-                        <td  class="action-cell">
+                        <td  className="action-cell">
                             <img src={remove} alt="remove icon" className='cart_remove_icon' />
                         </td>
                     </tr>

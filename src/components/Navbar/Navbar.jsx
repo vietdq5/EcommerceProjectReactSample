@@ -2,21 +2,42 @@ import './Navbar.css';
 import LinkWithIcon from './LinkWithIcon';
 import RocketImgSrc from '../../assets/rocket.png'
 import ProductImgSrc from '../../assets/glowing-star.png'
+import { NavLink } from 'react-router-dom';
+
+const navLinks = [
+    {
+        title: "Home",
+        link: "/",
+        emoji: RocketImgSrc
+    },
+    {
+        title: "Products",
+        link: "/product",
+        emoji: ProductImgSrc
+    },
+    {
+        title: "ProductDetail",
+        link: "/product/1",
+        emoji: ProductImgSrc
+    },
+    {
+        title: "My Order",
+        link: "/myorder",
+        emoji: ProductImgSrc
+    },
+    {
+        title: "Login",
+        link: "/login",
+        emoji: ProductImgSrc
+    },
+    {
+        title: "Sign Up",
+        link: "/signup",
+        emoji: ProductImgSrc
+    }
+];
 
 const Navbar = () => {
-
-    var narLinks = [
-        {
-            title: "Home",
-            link: "/",
-            emoji: RocketImgSrc
-        },
-        {
-            title: "Products",
-            link: "/",
-            emoji: ProductImgSrc
-        }
-    ];
 
     return (
         <nav className="align_center navbar">
@@ -29,13 +50,13 @@ const Navbar = () => {
             </div>
             <div className="align_center navbar_links">
                 {
-                    narLinks.map(item => {
-                        return <LinkWithIcon title={item.title} link={item.link} emoji={item.emoji} />
+                    navLinks.map(item => {
+                        return <LinkWithIcon key={item.title} title={item.title} link={item.link} emoji={item.emoji} />
                     })
                 }
-                <a href="/cart" className='align_center'>
+                <NavLink to="/cart" className='align_center'>
                     Cart <p className='align_center cart_counts'>0</p>
-                </a>
+                </NavLink>
             </div>
         </nav>
     )

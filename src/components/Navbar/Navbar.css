@@ -41,12 +41,16 @@
     cursor: pointer;
 }
 
-.navbar_link {
+.navbar_links {
     font-size: 20px;
 }
 
 .navbar_links>a {
     margin: 15px;
+}
+
+.navbar_links>a.active {
+    font-weight: 800;
 }
 
 .cart_counts {
