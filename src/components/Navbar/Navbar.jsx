@@ -16,11 +16,6 @@ const navLinks = [
         emoji: ProductImgSrc
     },
     {
-        title: "ProductDetail",
-        link: "/product/1",
-        emoji: ProductImgSrc
-    },
-    {
         title: "My Order",
         link: "/myorder",
         emoji: ProductImgSrc

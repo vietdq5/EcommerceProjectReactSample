@@ -1,5 +1,4 @@
 import './ProductCard.css'
-import IphoneImgSrc from '../../assets/iphone.jpg'
 import StartImgSrc from '../../assets/white-star.png'
 import BasketImgSrc from "../../assets/basket.png";
 import { NavLink } from 'react-router-dom';
@@ -22,9 +21,13 @@ const ProductCard = ({ product }) => {
                         </p>
                         <p className='product_review_count'>{product.reviews.counts}</p>
                     </div>
-                    <div className="add_to_cart">
-                        <img src={BasketImgSrc} alt="" />
-                    </div>
+                    {
+                        (product?.stock || 0) > 0 && (
+                            <div className="add_to_cart">
+                                <img src={BasketImgSrc} alt="" />
+                            </div>
+                        )
+                    }
                 </footer>
             </div>
         </article>
