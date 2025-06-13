@@ -19,7 +19,7 @@ const AppRoutingPage = () => {
             <Route path='/signup' element={<SignupPage />} />
             <Route element={<ProtectedRoute />}>
                 <Route path='/cart' element={<CartPage />} />
-                <Route path='/myorder' element={<MyOrder />} />
+                <Route path='/myorders' element={<MyOrder />} />
                 <Route path='/logout' element={<Logout />} />
             </Route>
         </Routes>

@@ -2,8 +2,13 @@ import './ProductCard.css'
 import StartImgSrc from '../../assets/white-star.png'
 import BasketImgSrc from "../../assets/basket.png";
 import { NavLink } from 'react-router-dom';
+import UserContext from '../../contexts/UserContext';
+import CartContext from '../../contexts/CartContext';
+import { useContext } from 'react';
 
 const ProductCard = ({ product }) => {
+    const { addToCart } = useContext(CartContext);
+    const user = useContext(UserContext);
     return (
         <article className='product_card'>
             <div className="product_image">
@@ -22,10 +27,11 @@ const ProductCard = ({ product }) => {
                         <p className='product_review_count'>{product.reviews.counts}</p>
                     </div>
                     {
-                        (product?.stock || 0) > 0 && (
-                            <div className="add_to_cart">
+                        (product?.stock || 0) > 0 && user && (
+                            <button className="add_to_cart"
+                                onClick={() => addToCart(product, 1)}>
                                 <img src={BasketImgSrc} alt="" />
-                            </div>
+                            </button>
                         )
                     }
                 </footer>

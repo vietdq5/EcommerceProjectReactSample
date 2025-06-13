@@ -1,10 +1,15 @@
-import './CartPage.css'
+
 import remove from "../../assets/remove.png";
 import Table from '../Common/Table';
 import QuantityInput from '../ProductDetail/QuantityInput';
 import UserContext from '../../contexts/UserContext';
 import CartContext from '../../contexts/CartContext';
 import { useContext, useEffect, useState } from 'react';
+import { toast } from "react-toastify";
+import { checkoutAPI } from "../../services/orderServices";
+
+// import css
+import './CartPage.css'
 
 const CartPage = () => {
     const user = useContext(UserContext);
@@ -20,6 +25,18 @@ const CartPage = () => {
         setSubTotal(total);
     }, [cart]);
     // function
+    const checkout = () => {
+        const oldCart = [...cart];
+        setCart([]);
+        checkoutAPI()
+            .then(() => {
+                toast.success("Order placed successfully!");
+            })
+            .catch(() => {
+                toast.error("Something went wrong!");
+                setCart(oldCart);
+            });
+    };
     return (
         <section className="align_center cart_page">
             <div className="align_center user_info">
@@ -70,7 +87,7 @@ const CartPage = () => {
                     </tr>
                 </tbody>
             </table>
-            <button className='search_button checkout_button'>Checkout</button>
+            <button className='search_button checkout_button' onClick={checkout}>Checkout</button>
         </section>
     );
 }
