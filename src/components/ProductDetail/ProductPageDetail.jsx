@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import './ProductPageDetail.css'
 import QuantityInput from './QuantityInput';
 import useDataHook from '../../hooks/useDataHook';
 import { useParams } from 'react-router-dom';
 import Loader from '../Common/Loader'
-
+import UserContext from "../../contexts/UserContext";
+import CartContext from '../../contexts/CartContext';
 // const product = {
 //     id: 1,
 //     title: "Product Title",
@@ -23,6 +24,8 @@ import Loader from '../Common/Loader'
 const ProductPageDetail = () => {
     const [selectedImage, setSelectedImage] = useState(0);
     const [quantity, setQuantity] = useState(1);
+    const user = useContext(UserContext);
+    const {addToCart} = useContext(CartContext);
     const { id } = useParams();
     const { data: product, error, isLoading } = useDataHook(`/products/${id}`);
 
@@ -62,14 +65,21 @@ const ProductPageDetail = () => {
                             <p className="single_product_price">
                                 ${product.price.toFixed(2)}
                             </p>
-                            <h2 className='single_product_quantity'>Quantity:</h2>
-                            <div className='align_center quantity_input'>
-                                <QuantityInput
-                                    quantity={quantity}
-                                    setQuantity={setQuantity}
-                                    stock={product.stock} />
-                            </div>
-                            <button className='search_button add_cart'>Add to Cart</button>
+                            {
+                                user && (
+                                    <>
+                                        <h2 className='single_product_quantity'>Quantity:</h2>
+                                        <div className='align_center quantity_input'>
+                                            <QuantityInput
+                                                quantity={quantity}
+                                                setQuantity={setQuantity}
+                                                stock={product.stock} />
+                                        </div>
+                                        <button className='search_button add_cart' onClick={() => addToCart(product, quantity)}>Add to Cart</button>
+                                    </>
+                                )
+                            }
+
                         </div>
                     </>
                 )

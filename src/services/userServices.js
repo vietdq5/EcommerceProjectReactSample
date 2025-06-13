@@ -26,9 +26,14 @@ export function logout() {
 
 export function getUser() {
     try {
-        const jwt = localStorage.getItem(tokenName);
+        const jwt = getJwt();
         return jwtDecode(jwt);
     } catch (error) {
         return null;
     }
+}
+
+
+export function getJwt() {
+    return localStorage.getItem(tokenName);
 }

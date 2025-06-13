@@ -7,8 +7,13 @@ import order from "../../assets/package.png";
 import lock from "../../assets/locked.png";
 import LinkWithIcon from "./LinkWithIcon";
 import { NavLink } from "react-router-dom";
+import UserContext from "../../contexts/UserContext";
+import CartContext from "../../contexts/CartContext";
+import { useContext } from "react";
 
-const Navbar = ({ user }) => {
+const Navbar = () => {
+    const user = useContext(UserContext);
+    const { cart } = useContext(CartContext);
     return (
         <nav className='align_center navbar'>
             <div className='align_center'>
@@ -54,7 +59,7 @@ const Navbar = ({ user }) => {
                             emoji={lock}
                         />
                         <NavLink to='/cart' className='align_center'>
-                            Cart <p className='align_center cart_counts'>0</p>
+                            Cart <p className='align_center cart_counts'>{cart?.length || 0}</p>
                         </NavLink>
                     </>
                 )}
