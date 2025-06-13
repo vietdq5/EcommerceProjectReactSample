@@ -8,16 +8,16 @@ const HomePage = () => {
     return (
         <div>
             <HeroSection
-                title='Bye Iphone 14 prod'
+                title='Buy Iphone 14 prod'
                 subtitle='Experience the power of the latest iPhone 14 with our most Pro camera ever.'
-                link='/'
+                link='/product/684ba1cc49dee9c0aacebfcd'
                 image={IPhoneImg}
             />
             <FeaturedProducts />
             <HeroSection
                 title='Build the ultimate setup'
                 subtitle='Experience the power of the latest iPhone 14 with our most Pro camera ever.'
-                link='/'
+                link='/product/684ba1cc49dee9c0aacebfd5'
                 image={MacImg}
             />
         </div>
