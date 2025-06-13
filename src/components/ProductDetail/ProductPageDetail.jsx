@@ -25,7 +25,7 @@ const ProductPageDetail = () => {
     const [quantity, setQuantity] = useState(1);
     const { id } = useParams();
     const { data: product, error, isLoading } = useDataHook(`/products/${id}`);
-    console.log(product);
+
     return (
         <section className="align_center single_product">
             {error && <em className='form_error'>{error}</em>}
@@ -39,6 +39,7 @@ const ProductPageDetail = () => {
                                     product.images.map((image, index) => {
                                         return (
                                             <img
+                                                key={image}
                                                 src={`http://localhost:5000/products/${image}`}
                                                 alt={product.title}
                                                 className={selectedImage === index ? "selected_image" : ""}

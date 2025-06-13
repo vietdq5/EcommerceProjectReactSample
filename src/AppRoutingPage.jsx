@@ -11,7 +11,7 @@ const AppRoutingPage = () => {
     return (
         <Routes>
             <Route path='/' element={<HomePage />} />
-            <Route path='/product' element={<ProductPage />} />
+            <Route path='/products' element={<ProductPage />} />
             <Route path='/product/:id' element={<ProductPageDetail />} />
             <Route path='/myorder' element={<MyOrder />} />
             <Route path='/cart' element={<CartPage />} />

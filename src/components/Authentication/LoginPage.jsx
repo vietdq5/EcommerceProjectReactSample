@@ -2,6 +2,8 @@ import './LoginPage.css'
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { login } from "../../services/userServices";
+import { useState } from 'react'
 
 const schemaValidation = z.object(
     {
@@ -16,14 +18,24 @@ const schemaValidation = z.object(
 );
 
 const LoginPage = () => {
-
+    const [formError, setFormError] = useState("");
     const {
         register,
         handleSubmit,
         formState: { errors }
     } = useForm({ resolver: zodResolver(schemaValidation) });
 
-    const onSubmit = (formData) => console.log(formData);
+    const onSubmit = async (formData) => {
+        try {
+            await login(formData);
+
+            window.location = "/";
+        } catch (err) {
+            if (err.response && err.response.status === 400) {
+                setFormError(err.response.data.message);
+            }
+        }
+    };
 
     return (
         <section className="align_center form_page">
@@ -57,6 +69,7 @@ const LoginPage = () => {
                         }
                     </div>
                 </div>
+                {formError && <em className='form_error'>{formError}</em>}
                 <button type='submit' className='search_button form_submit'>
                     Submit
                 </button>
